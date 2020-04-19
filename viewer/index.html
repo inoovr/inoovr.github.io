@@ -17,12 +17,12 @@
               <p class="message">An unknown error occurred.</p>
             </div>
           </div>
-          <button id="permission">Ask for permission</button>
+          <button id="permission" onclick='DeviceMotionEvent.requestPermission();'>Ask for permission</button>
           <script src="build/vrview.js"></script>
 
 
   </body>
-  <script>
+  <script type="text/javascript">
 
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
         document.getElementById('deviceType').innerText = 'iOS 13'
