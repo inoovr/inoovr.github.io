@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>VR2</title>
+		<title>VRView</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
@@ -18,23 +18,19 @@
             </div>
           </div>
           <script src="build/vrview.js"></script>
-
-          <script type="text/javascript">
-            function requestOrientationPermission(){
-                DeviceOrientationEvent.requestPermission()
-                .then(response => {
-                    if (response == 'granted') {
-                        window.addEventListener('deviceorientation', (e) => {
-                            // do something with e
-                        })
-                    }
-                })
-                .catch(console.error)
-            }
-        </script>
-        
-        <button id="request" onclick='requestOrientationPermission();'>Request orientation permission</button>
-
-
+      <button id="request" onclick='requestOrientationPermission();'>Request orientation permission</button>
+      <script type="text/javascript">
+        function requestOrientationPermission(){
+            DeviceOrientationEvent.requestPermission()
+            .then(response => {
+                if (response == 'granted') {
+                    window.addEventListener('deviceorientation', (e) => {
+                        // do something with e
+                    })
+                }
+            })
+            .catch(console.error)
+        }
+    </script>
   </body>
 </html>

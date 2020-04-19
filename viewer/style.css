@@ -88,15 +88,14 @@ canvas:active {
 
 #request {
   display: true;
-  position: fixed;
+  position: absolute;
   top: 0px;
-  z-index: 99;
+  z-index: 100;
   font-size: 18px;
   border: none;
   outline: none;
   background-color: rgba(0, 0, 0, 0. 1);
   color: rgba(255,255, 255, 0. 5);
-  cursor: pointer;
   padding: 10px;
   border-radius: 3px;
 } 
