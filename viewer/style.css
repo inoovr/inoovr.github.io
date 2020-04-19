@@ -85,8 +85,7 @@ canvas:active {
   cursor: -webkit-grabbing;
 }
 
-
-#request {
+#permission{
   position : absolute;
   top : 0;
   left : 0;
