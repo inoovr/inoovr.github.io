@@ -18,50 +18,34 @@
             </div>
           </div>
           <script src="build/vrview.js"></script>
-    <script type="text/javascript">
-      let permissionGranted = false;
 
-      function setup() {
-        createCanvas(windowWidth, windowHeight)
-
-        // DeviceOrientationEvent, DeviceMotionEvent
-        if(typeof(DeviceOrientationEvent) !== 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function') {
-          // ios 13 device
-
-          DeviceOrientationEvent.requestPermission()
-            .catch(() => {
-              // show permission dialog only the first time
-              let button = createButton("click to allow access to sensors");
-              button.style("font-size", "24px");
-              button.style("z-index", "10");
-              button.center();
-              button.mousePressed( requestAccess );
-              throw error;
-            })
-            .then(() => {
-              // on any subsequent visits
-              permissionGranted = true;
-            })
-        } else {          
-          // non ios 13 device  
-          permissionGranted = true;
-        }
-      }
-
-      function requestAccess() {
-        DeviceOrientationEvent.requestPermission()
-          .then(Response => {
-            if(Response == 'granted') {
-              permissionGranted = true;
-            } else {
-              permissionGranted = false;
-            }
-          })
-        .catch(console.error);
-
-        this.remove();
-      }
-    </script>
+          <div id="container">
+            <div id="deviceType"></div>
+            <div style="text-align: center">
+                <button id="permission">Ask for permission</button>
+            </div>
+            <div id="permissionStatus">Pending</div>
+    </div>
 
   </body>
+  <script>
+
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+        document.getElementById('deviceType').innerText = 'iOS 13'
+        document.getElementById('permission').addEventListener('click', function () {
+            console.log('button clicked')
+            DeviceMotionEvent.requestPermission().then(response => {
+
+                // This is showing "denied" without showing any permission popup
+                console.log(response)
+                document.getElementById('permissionStatus').innerText = response
+
+            }).catch(console.error)
+        });
+    } else {
+        // ignore this case for processing
+        console.log('non iOS 13')
+        document.getElementById('deviceType').innerText = 'non iOS 13'
+    }
+</script>
 </html>
