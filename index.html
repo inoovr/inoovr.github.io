@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>VR</title>
+		<title>VR1</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
@@ -11,7 +11,7 @@
 
 	</head>
 	<body>
-    <script type="text/javascript">
+    <script>
       let permissionGranted = false;
 
       function setup() {
@@ -26,7 +26,6 @@
               // show permission dialog only the first time
               let button = createButton("click to allow access to sensors");
               button.style("font-size", "24px");
-              button.style("z-index", "10");
               button.center();
               button.mousePressed( requestAccess );
               throw error;
