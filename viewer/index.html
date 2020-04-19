@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>VR</title>
+		<title>VRv</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
@@ -17,7 +17,6 @@
               <p class="message">An unknown error occurred.</p>
             </div>
           </div>
-          <script src="build/vrview.js"></script>
           <script type="text/javascript">
             function requestOrientationPermission(){
                 DeviceOrientationEvent.requestPermission()
@@ -33,5 +32,7 @@
         </script>
         
         <button id="request" onclick='requestOrientationPermission();'>Request orientation permission</button>
+          <script src="build/vrview.js"></script>
+
   </body>
 </html>
