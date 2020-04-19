@@ -9,67 +9,29 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="stylesheet" href="style.css">
 
-
 	</head>
 	<body>
-    <div id="error" class="dialog">
-      <div class="wrap">
-        <h1 class="title">Error</h1>
-        <p class="message">An unknown error occurred.</p>
-      </div>
-    </div>
-    <script src="build/vrview.js"></script>
-    <div class="full-width-block">
-      <div *ngIf="ifIOS" (click)="requestPermissionsIOS()" 
-        class="hidden-overlay" [ngClass]="{'hide': overlayClicked }">
-      </div>
-    </div>
+        <div id="error" class="dialog">
+            <div class="wrap">
+              <h1 class="title">Error</h1>
+              <p class="message">An unknown error occurred.</p>
+            </div>
+          </div>
+          <script src="build/vrview.js"></script>
+    <script type="text/javascript">
+      function requestOrientationPermission(){
+          DeviceOrientationEvent.requestPermission()
+          .then(response => {
+              if (response == 'granted') {
+                  window.addEventListener('deviceorientation', (e) => {
+                      // do something with e
+                  })
+              }
+          })
+          .catch(console.error)
+      }
+  </script>
+  
+  <button id="request" onclick='requestOrientationPermission();'>Request orientation permission</button>
   </body>
-  <script>
-    // variable declarations
-OverlayClicked: boolean = false;
-isIOS: boolean = false;
-
-ngOnInit () {
- this.isIOS = ((/iPad|iPhone|iPod/.test(navigator.userAgent)) && (typeof (DeviceMotionEvent as any).requestPermission === 'function'));
-}
-
-// for requesting permission on iOs 13 devices
-requestPermissionsIOS() {
- this.requestDeviceMotionIOS();
- this.requestDeviceOrientationIOS();
- this.overlayClicked = true;
-}
-
-// requesting device motion permission
-requestDeviceMotionIOS() {
- if (typeof (DeviceMotionEvent as any).requestPermission === 'function') {
-  (DeviceMotionEvent as any).requestPermission()
-   .then(permissionState => {
-   if (permissionState === 'granted') {
-    window.addEventListener('devicemotion', () => {});
-   }
-  })
-   .catch(console.error);
- } else {
-  // handle regular non iOS 13+ devices
- }
-}
-
-// requesting device orientation permission
-requestDeviceOrientationIOS() {
- if (typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
-  (DeviceOrientationEvent as any).requestPermission()
-   .then(permissionState => {
-   if (permissionState === 'granted') {
-    window.addEventListener('deviceorientation', () => {});
-   }
-  })
-   .catch(console.error);
- } else {
-  // handle regular non iOS 13+ devices
- }
-}
-</script>
-
 </html>
