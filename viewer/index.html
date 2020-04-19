@@ -39,9 +39,9 @@
         <p class="message">An unknown error occurred.</p>
       </div>
     </div>
-    
-    <script src="build/vrview.js"></script>
     <button id="request" title="Tap Here">Clique para acessar modo VR</button>
+    <script src="build/vrview.js"></script>
+
 
   </body>
   <script> function check() {     var match = (navigator. appVersion). match(/OS (\d+)(\d+)? (\d+)? /),         version;     if (match !== undefined && match !== null) {         version = [             parseInt(match[1], 10),             parseInt(match[2], 10),             parseInt(match[3] || 0, 10)         ];         ver=parseFloat(version. join('. ')); 	if (ver < 13) {             document. getElementById('request'). style. visibility = 'hidden';         } else {             document. getElementById('request'). style. visibility = 'visible';         }     }     else { 	document. getElementById('request'). style. visibility = 'hidden'; 	} } </script>
