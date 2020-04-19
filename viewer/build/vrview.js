@@ -40011,12 +40011,12 @@ FusionPositionSensorVRDevice.prototype.getOrientation = function() {
   // deviceorientation event.
   var orientation = this.filter.getOrientation();
 
-  /* global DeviceOrientationEvent, location  */
-var registerComponent = require('../../core/component').registerComponent;
-var utils = require('../../utils/');
+/* global DeviceOrientationEvent, location  */
+var registerComponent = _dereq_('../../core/component').registerComponent;
+var utils = _dereq_('../../utils/');
 var bind = utils.bind;
 
-var constants = require('../../constants/');
+var constants = _dereq_('../../constants/');
 
 var MODAL_CLASS = 'a-modal';
 var DIALOG_CLASS = 'a-dialog';
@@ -40207,6 +40207,9 @@ function createDialog (text, buttonsContainerEl) {
 
   return modalContainer;
 }
+
+},{"../../constants/":120,"../../core/component":128,"../../utils/":202}],100:[function(_dereq_,module,exports){
+var registerComponent = _dereq_('../../core/component').registerComponent;
 
   // Predict orientation.
   this.predictedQ = this.posePredictor.getPrediction(orientation, this.gyroscope, this.previousTimestampS);
