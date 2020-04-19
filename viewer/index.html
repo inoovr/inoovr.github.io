@@ -19,19 +19,48 @@
           </div>
           <script src="build/vrview.js"></script>
     <script type="text/javascript">
-      function requestOrientationPermission(){
+      let permissionGranted = false;
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight)
+
+        // DeviceOrientationEvent, DeviceMotionEvent
+        if(typeof(DeviceOrientationEvent) !== 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function') {
+          // ios 13 device
+
           DeviceOrientationEvent.requestPermission()
-          .then(response => {
-              if (response == 'granted') {
-                  window.addEventListener('deviceorientation', (e) => {
-                      // do something with e
-                  })
-              }
-          })
-          .catch(console.error)
+            .catch(() => {
+              // show permission dialog only the first time
+              let button = createButton("click to allow access to sensors");
+              button.style("font-size", "24px");
+              button.center();
+              button.mousePressed( requestAccess );
+              throw error;
+            })
+            .then(() => {
+              // on any subsequent visits
+              permissionGranted = true;
+            })
+        } else {          
+          // non ios 13 device  
+          permissionGranted = true;
+        }
       }
-  </script>
-  
-  <button id="request" onclick='requestOrientationPermission();'>Request orientation permission</button>
+
+      function requestAccess() {
+        DeviceOrientationEvent.requestPermission()
+          .then(Response => {
+            if(Response == 'granted') {
+              permissionGranted = true;
+            } else {
+              permissionGranted = false;
+            }
+          })
+        .catch(console.error);
+
+        this.remove();
+      }
+    </script>
+
   </body>
 </html>
