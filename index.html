@@ -1,38 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-    <title>TESTE GIROSC</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <link rel="stylesheet" href="style.css">
-	</head>
-	<body>
-    <script type="text/javascript">
-if ( location.protocol != "https:" ) {
-location.href = "https:" + window.location.href.substring( window.location.protocol.length );
-}
-function permission () {
-    if ( typeof( DeviceMotionEvent ) !== "undefined" && typeof( DeviceMotionEvent.requestPermission ) === "function" ) {
-        // (optional) Do something before API request prompt.
-        DeviceMotionEvent.requestPermission()
-            .then( response => {
-            // (optional) Do something after API prompt dismissed.
-            if ( response == "granted" ) {
-                window.addEventListener( "devicemotion", (e) => {
-                    // do something for 'e' here.
-                })
-            }
-        })
-            .catch( console.error )
-    } else {
-        alert( "DeviceMotionEvent is not defined" );
-    }
-}
-const btn = document.getElementById( "request" );
-btn.addEventListener( "click", permission );
-  </script>
-  </body>
+<html>
+    <style>
+        #container{
+            margin: 20px; 
+            padding: 20px
+        }
+        #deviceType{
+            text-align: center; 
+            font-family: Arial, Helvetica, sans-serif; 
+            font-size: 3rem;
+            font-weight: bold; 
+            color: #08f
+        }
+        #permission{
+            padding: 2rem 5rem;
+            background: #08f;
+            color: white; 
+            margin-top: 30;
+            font-family: Arial, Helvetica, sans-serif; 
+            font-size: 3rem;
+            border: none; 
+            border-radius: 1rem
+        }
+        #permissionStatus{
+            text-align: center; 
+            font-family: Arial, Helvetica, sans-serif; 
+            font-size: 2.5rem;
+            font-weight: 600; 
+            color: red;
+            margin-top: 30px
+        }
+    </style>
+    <body>
+        <div id="container">
+                <div id="deviceType"></div>
+                <div style="text-align: center">
+                    <button id="permission">Ask for permission</button>
+                </div>
+                <div id="permissionStatus">Pending</div>
+        </div>
+    </body>
+    <script>
+
+        if (typeof DeviceMotionEvent.requestPermission === 'function') {
+            document.getElementById('deviceType').innerText = 'iOS 13'
+            document.getElementById('permission').addEventListener('click', function () {
+                console.log('button clicked')
+                DeviceMotionEvent.requestPermission().then(response => {
+
+                    // This is showing "denied" without showing any permission popup
+                    console.log(response)
+                    document.getElementById('permissionStatus').innerText = response
+
+                }).catch(console.error)
+            });
+        } else {
+            // ignore this case for processing
+            console.log('non iOS 13')
+            document.getElementById('deviceType').innerText = 'non iOS 13'
+        }
+    </script>
 </html>
