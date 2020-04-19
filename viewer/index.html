@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>VR1</title>
+		<title>VR</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
@@ -17,29 +17,41 @@
               <p class="message">An unknown error occurred.</p>
             </div>
           </div>
-          <button id="permission" onclick='DeviceMotionEvent.requestPermission();'>Ask for permission</button>
+          <button id="permission" onclick="onClick()";'>Ask for permission</button>
           <script src="build/vrview.js"></script>
 
 
   </body>
   <script type="text/javascript">
-
+  function onClick() {
+    // feature detect
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
-        document.getElementById('deviceType').innerText = 'iOS 13'
-        document.getElementById('permission').addEventListener('click', function () {
-            console.log('button clicked')
-            DeviceMotionEvent.requestPermission().then(response => {
-
-                // This is showing "denied" without showing any permission popup
-                console.log(response)
-                document.getElementById('permissionStatus').innerText = response
-
-            }).catch(console.error)
-        });
+      DeviceMotionEvent.requestPermission()
+        .then(permissionState => {
+          if (permissionState === 'granted') {
+            window.addEventListener('devicemotion', () => {});
+          }
+        })
+        .catch(console.error);
     } else {
-        // ignore this case for processing
-        console.log('non iOS 13')
-        document.getElementById('deviceType').innerText = 'non iOS 13'
+      // handle regular non iOS 13+ devices
     }
+  }
 </script>
+<script type="text/javascript">
+  function onClick() {
+    // feature detect
+    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission()
+        .then(permissionState => {
+          if (permissionState === 'granted') {
+            window.addEventListener('deviceorientation', () => {});
+          }
+        })
+        .catch(console.error);
+    } else {
+      // handle regular non iOS 13+ devices
+    }
+  }
+  </script>
 </html>
