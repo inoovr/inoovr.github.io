@@ -1,62 +1,31 @@
-<html>
-    <style>
-        #container{
-            margin: 20px; 
-            padding: 20px
-        }
-        #deviceType{
-            text-align: center; 
-            font-family: Arial, Helvetica, sans-serif; 
-            font-size: 3rem;
-            font-weight: bold; 
-            color: #08f
-        }
-        #permission{
-            padding: 2rem 5rem;
-            background: #08f;
-            color: white; 
-            margin-top: 30;
-            font-family: Arial, Helvetica, sans-serif; 
-            font-size: 3rem;
-            border: none; 
-            border-radius: 1rem
-        }
-        #permissionStatus{
-            text-align: center; 
-            font-family: Arial, Helvetica, sans-serif; 
-            font-size: 2.5rem;
-            font-weight: 600; 
-            color: red;
-            margin-top: 30px
-        }
-    </style>
-    <body>
-        <div id="container">
-                <div id="deviceType"></div>
-                <div style="text-align: center">
-                    <button id="permission">Ask for permission</button>
-                </div>
-                <div id="permissionStatus">Pending</div>
-        </div>
-    </body>
-    <script>
 
-        if (typeof DeviceMotionEvent.requestPermission === 'function') {
-            document.getElementById('deviceType').innerText = 'iOS 13'
-            document.getElementById('permission').addEventListener('click', function () {
-                console.log('button clicked')
-                DeviceMotionEvent.requestPermission().then(response => {
+<HTML>
+<HEAD>
 
-                    // This is showing "denied" without showing any permission popup
-                    console.log(response)
-                    document.getElementById('permissionStatus').innerText = response
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
-                }).catch(console.error)
-            });
-        } else {
-            // ignore this case for processing
-            console.log('non iOS 13')
-            document.getElementById('deviceType').innerText = 'non iOS 13'
-        }
-    </script>
-</html>
+  <script>
+    $(document).ready(function(){
+      $('.slider').bxSlider();
+    });
+  </script>
+
+	<title>inoVR</title>
+ 
+
+
+</HEAD>
+
+<BODY>
+
+
+  <div class="slider">
+    <div><center><iframe width="85%" height="500px" allowfullscreen frameborder="0" src="https://inovrconsultoria.github.io/vrview/?image=examples/SALA01.jpg"></iframe></center></div>
+    <div><center><iframe width="85%" height="500px" allowfullscreen frameborder="0" src="https://inovrconsultoria.github.io/vrview/?image=examples/sitepoint.jpg"></iframe></center></div>
+  </div>
+
+
+</BODY>
+</HTML> 
